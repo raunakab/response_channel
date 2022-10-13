@@ -166,7 +166,7 @@ impl<M, R> Sender<M, R> {
     ///     let response = tx.send_await_automatic(message).await.unwrap().unwrap();
     ///     assert_eq!(response, message + 1);
     /// });
-    /// 
+    ///
     /// let fut2 = tokio::task::spawn(async move {
     ///     while let Some((message, tx)) = rx.recv().await {
     ///         let response = message + 1;
@@ -212,7 +212,7 @@ impl<M, R> Sender<M, R> {
     ///     assert_eq!(response1, message1 + 1);
     ///     assert_eq!(response2, message2 + 1);
     /// });
-    /// 
+    ///
     /// let fut2 = tokio::task::spawn(async move {
     ///     while let Some((message, tx)) = rx.recv().await {
     ///         let response = message + 1;
