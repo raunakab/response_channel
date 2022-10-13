@@ -1,10 +1,10 @@
+use response_channel::error::Error;
+use tokio::sync::mpsc;
+
 #[tokio::test]
 async fn main() {
-    let (tx, rx) = response_channel::temporary::channel::<u8, u8>(10);
+    let (mut tx, rx) = response_channel::channel::<u8, u8>(10, None);
     drop(rx);
-    let actual = tx.send_await_automatic(10).await.unwrap_err();
-    let expected = response_channel::error::Error::SendError(
-        tokio::sync::mpsc::error::SendError(10),
-    );
-    assert_eq!(actual, expected);
+    let err = tx.send_await_automatic(1).await.unwrap_err();
+    assert!(matches!(err, Error::SendError(mpsc::error::SendError(1))));
 }
