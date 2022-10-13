@@ -8,10 +8,11 @@ Usually, instantiating a bidrectional channel is cumbersome and requires a lot o
 use tokio::task::spawn;
 use tokio::join;
 
+type Message = u8;
+type Response = u8;
+
 fn main() {
     const BUFFER_SIZE: usize = 10;
-    type Message = u8;
-    type Response = u8;
     let (mut tx, mut rx) = response_channel::channel::<Message, Response>(BUFFER_SIZE, None);
     let fut1 = spawn(async move {
         for i in 0..10 {
